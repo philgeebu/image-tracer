@@ -1,14 +1,3 @@
-<script setup>
-import { ref } from "vue";
-
-const selectedImage = ref(null);
-const imgSource = ref(null);
-
-const displaySelectedImage = (value) => {
-    imgSource.value = URL.createObjectURL(value);
-};
-</script>
-
 <template>
     <q-form>
         <q-file
@@ -22,3 +11,14 @@ const displaySelectedImage = (value) => {
         <img v-if="imgSource" :src="imgSource" />
     </q-card>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const selectedImage = ref(null);
+const imgSource = ref(null);
+
+const displaySelectedImage = (value) => {
+    imgSource.value = URL.createObjectURL(value);
+};
+</script>
