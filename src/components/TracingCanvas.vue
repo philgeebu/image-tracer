@@ -6,18 +6,16 @@
         @mouseup="stopDrawing()"
     >
     </canvas>
-    <ToolBox />
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import useMainStore from 'stores/main';
-import ToolBox from 'components/ToolBox.vue';
 
 const storeMain = useMainStore();
 const tracingCanvas = ref(null);
 
-const startDrawing = (e) => {
+const startDrawing = (e: any) => {
     storeMain.newPath = true;
     const x = e.clientX - e.target.offsetLeft;
     const y = e.clientY - e.target.offsetTop;
@@ -25,7 +23,7 @@ const startDrawing = (e) => {
     storeMain.context.moveTo(x, y);
 };
 
-const keepDrawing = (e) => {
+const keepDrawing = (e: any) => {
     const x = e.clientX - e.target.offsetLeft;
     const y = e.clientY - e.target.offsetTop;
     if (storeMain.newPath) {
