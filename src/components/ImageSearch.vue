@@ -18,7 +18,10 @@
         <div v-for="result in results" :key="result.id">
             <q-card-section>
                 <div class="row justify-center">
-                    <router-link :to="result.id.toString()">
+                    <router-link
+                        to="/trace"
+                        @click="setCurrentImage(result.id)"
+                    >
                         <img :src="getImageUrl(result.webformatURL)" alt=""
                     /></router-link>
                 </div>
@@ -30,11 +33,21 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { useImageStore } from '../stores/useImageStore';
+
+const storeImage = useImageStore();
+
 const searchTerm = ref('');
 const results = ref(<any>[]);
-const getImageUrl = (name: string) => {
+
+const getImageUrl = (name: string): string => {
     return new URL(`${name}`, import.meta.url).href;
 };
+
+const setCurrentImage = (id: number): void => {
+    storeImage.currentImage = id;
+};
+
 watch(searchTerm, () => {
     fetch(
         `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&q=${encodeURIComponent(

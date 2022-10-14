@@ -1,10 +1,4 @@
 <template>
-    <p class="handwritten-font">Library</p>
+    <h2 class="handwritten-font">Library</h2>
 </template>
 <script setup lang="ts"></script>
-
-<style scoped>
-.handwritten-font {
-    font-size: 4.5rem;
-}
-</style>
