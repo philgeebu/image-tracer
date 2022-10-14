@@ -8,7 +8,7 @@ export default defineStore('mainStore', () => {
     const strokeStyleR = ref(0);
     const strokeStyleG = ref(0);
     const strokeStyleB = ref(0);
-    const strokeStyleA = ref(0.05);
+    const strokeStyleA = ref(1);
 
     const setStrokeStyle = (): void => {
         const rgbaString =
