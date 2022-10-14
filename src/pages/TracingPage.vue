@@ -1,13 +1,14 @@
 <template>
     <q-page>
-        {{ routeID }}
-        <TracingCanvas />
+        <q-card>
+            <q-card-section>
+                <TracingCanvas />
+            </q-card-section>
+            <ToolBox />
+        </q-card>
     </q-page>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
 import TracingCanvas from 'components/TracingCanvas.vue';
-const route = useRoute();
-const routeID = ref(route.params.id);
+import ToolBox from 'components/ToolBox.vue';
 </script>
