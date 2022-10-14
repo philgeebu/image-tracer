@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 const searchTerm = ref('');
-const results = ref([]);
+const results = ref(<any>[]);
 const getImageUrl = (name: string) => {
     return new URL(`${name}`, import.meta.url).href;
 };
