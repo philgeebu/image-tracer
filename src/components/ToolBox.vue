@@ -1,72 +1,78 @@
 <template>
     <div id="mydiv" ref="mydiv">
-        <div id="mydivheader" ref="mydivheader">Click here to move</div>
-        <label>
-            Size - <span>{{ storeStroke.strokeWidth }}</span>
-        </label>
-        <br />
-        <input
-            type="range"
-            min="1"
-            max="15"
-            step="1"
-            v-model="storeStroke.strokeWidth"
-        />
-        <br />
-        <label>
-            R - <span>{{ storeStroke.strokeStyleR }}</span>
-        </label>
-        <br />
-        <input
-            type="range"
-            min="1"
-            max="255"
-            step="1"
-            v-model="storeStroke.strokeStyleR"
-        />
-        <br />
-        <label>
-            G - <span>{{ storeStroke.strokeStyleG }}</span>
-        </label>
-        <br />
-        <input
-            type="range"
-            min="1"
-            max="255"
-            step="1"
-            v-model="storeStroke.strokeStyleG"
-        />
-        <br />
-        <label>
-            B - <span>{{ storeStroke.strokeStyleB }}</span>
-        </label>
-        <br />
-        <input
-            type="range"
-            min="1"
-            max="255"
-            step="1"
-            v-model="storeStroke.strokeStyleB"
-        />
-        <br />
-        <label>
-            A - <span>{{ storeStroke.strokeStyleA }}</span>
-        </label>
-        <br />
-        <input
-            type="range"
-            min="0.001"
-            max="1"
-            step="0.001"
-            v-model="storeStroke.strokeStyleA"
-        />
+        <q-card>
+            <div id="mydivheader" ref="mydivheader">
+                <q-card-section>Click here to move</q-card-section>
+            </div>
+            <q-card-section>
+                <label>
+                    Size - <span>{{ storeContext.strokeWidth }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="1"
+                    max="15"
+                    step="1"
+                    v-model="storeContext.strokeWidth"
+                />
+                <br />
+                <label>
+                    Red - <span>{{ storeContext.strokeStyleR }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="1"
+                    max="255"
+                    step="1"
+                    v-model="storeContext.strokeStyleR"
+                />
+                <br />
+                <label>
+                    Green - <span>{{ storeContext.strokeStyleG }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="1"
+                    max="255"
+                    step="1"
+                    v-model="storeContext.strokeStyleG"
+                />
+                <br />
+                <label>
+                    Blue - <span>{{ storeContext.strokeStyleB }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="1"
+                    max="255"
+                    step="1"
+                    v-model="storeContext.strokeStyleB"
+                />
+                <br />
+                <label>
+                    Alpha - <span>{{ storeContext.strokeStyleA }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="0.001"
+                    max="1"
+                    step="0.001"
+                    v-model="storeContext.strokeStyleA"
+                />
+            </q-card-section>
+        </q-card>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useStrokeStore } from '../stores/useStrokeStore';
-const storeStroke = useStrokeStore();
+import { useContextStore } from '../stores/useContextStore';
+const storeContext = useContextStore();
 
 const mydiv = ref<HTMLDivElement>();
 const mydivheader = ref<HTMLDivElement>();

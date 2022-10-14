@@ -1,7 +1,7 @@
 import { ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 
-export const useStrokeStore = defineStore('strokeStore', () => {
+export const useContextStore = defineStore('contextStore', () => {
     const context = ref<any>(null);
     const newPath = ref(false);
     const strokeWidth = ref(1);
