@@ -29,7 +29,9 @@
 
         <!-- FOOTER -->
         <q-footer class="row justify-center">
-            <FooterContent />
+            <footer class="q-py-sm">
+                2022 | CS701 - Term Project | Phil Gee
+            </footer>
         </q-footer>
     </q-layout>
 </template>
@@ -37,14 +39,5 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import TracingLibrary from 'components/TracingLibrary.vue';
-import FooterContent from 'components/FooterContent.vue';
 const leftDrawerOpen = ref(false);
 </script>
-
-<style scoped>
-.q-toolbar__title > a {
-    font-size: 2rem;
-    text-decoration: none;
-    color: white;
-}
-</style>
