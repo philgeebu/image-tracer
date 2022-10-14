@@ -1,9 +1,11 @@
 <template>
     <canvas
+        width="777"
+        height="777"
         ref="tracingCanvas"
-        @mousedown="startDrawing($event)"
-        @mousemove="keepDrawing($event)"
-        @mouseup="stopDrawing()"
+        @mousedown="onMouseDown($event)"
+        @mousemove="onMouseMove($event)"
+        @mouseup="onMouseUp($event)"
     >
     </canvas>
 </template>
@@ -15,26 +17,44 @@ import useMainStore from 'stores/main';
 const storeMain = useMainStore();
 const tracingCanvas = ref(null);
 
-const startDrawing = (e: any) => {
-    storeMain.newPath = true;
-    const x = e.clientX - e.target.offsetLeft;
-    const y = e.clientY - e.target.offsetTop;
-    storeMain.context.beginPath();
-    storeMain.context.moveTo(x, y);
+const x = ref(0);
+const y = ref(0);
+const isDrawing = ref(false);
+const drawLine = (
+    context: any,
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number
+) => {
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.stroke();
+    context.closePath();
 };
 
-const keepDrawing = (e: any) => {
-    const x = e.clientX - e.target.offsetLeft;
-    const y = e.clientY - e.target.offsetTop;
-    if (storeMain.newPath) {
-        storeMain.context.lineTo(x, y);
-        storeMain.context.stroke();
+const onMouseDown = (e: any) => {
+    x.value = e.offsetX;
+    y.value = e.offsetY;
+    isDrawing.value = true;
+};
+
+const onMouseMove = (e: any) => {
+    if (isDrawing.value === true) {
+        drawLine(storeMain.context, x.value, y.value, e.offsetX, e.offsetY);
+        x.value = e.offsetX;
+        y.value = e.offsetY;
     }
 };
 
-const stopDrawing = () => {
-    storeMain.context.closePath();
-    storeMain.newPath = false;
+const onMouseUp = (e: any) => {
+    if (isDrawing.value === true) {
+        drawLine(storeMain.context, x.value, y.value, e.offsetX, e.offsetY);
+        x.value = 0;
+        y.value = 0;
+        isDrawing.value = false;
+    }
 };
 
 onMounted(() => {
