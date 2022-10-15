@@ -1,6 +1,6 @@
 <template>
     <q-page>
-        <q-card>
+        <q-card class="q-mt-lg">
             <q-card-section>
                 <TracingCanvas />
             </q-card-section>

@@ -1,6 +1,6 @@
 <template>
-    <img :src="imageSource" />
     <canvas
+        :style="'opacity: ' + storeTracing.opacity"
         :width="canvasWidth + 40"
         :height="canvasHeight + 40"
         ref="tracingCanvas"
@@ -9,15 +9,28 @@
         @mouseup="onMouseUp($event)"
     >
     </canvas>
+    <img :src="imageSource" :style="'opacity: ' + storeImage.opacity" />
+    <div
+        class="whiteCanvasBackground"
+        :style="
+            'width: ' +
+            (canvasWidth + 40) +
+            'px; height: ' +
+            (canvasHeight + 40) +
+            'px;'
+        "
+    ></div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useContextStore } from '../stores/useContextStore';
 import { useImageStore } from '../stores/useImageStore';
+import { useTracingStore } from '../stores/useTracingStore';
 
 const storeContext = useContextStore();
 const storeImage = useImageStore();
+const storeTracing = useTracingStore();
 
 const tracingCanvas = ref<HTMLCanvasElement>();
 const x = ref(0);
@@ -68,7 +81,7 @@ onMounted(() => {
     storeContext.context = tracingCanvas.value.getContext('2d');
 
     fetch(
-        `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeImage.currentImage}`
+        `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeImage.currentImageID}`
     )
         .then((response) => response.json())
         .then((data) => {
@@ -83,12 +96,16 @@ onMounted(() => {
 <style scoped>
 canvas {
     cursor: pointer;
-    position: relative;
-    z-index: 8;
+    position: absolute;
+    z-index: 9;
 }
-
 img {
     border: 20px white solid;
     position: absolute;
+    z-index: 8;
+}
+.whiteCanvasBackground {
+    background-color: white;
+    position: relative;
 }
 </style>

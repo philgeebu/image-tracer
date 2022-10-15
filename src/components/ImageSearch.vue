@@ -45,7 +45,7 @@ const getImageUrl = (name: string): string => {
 };
 
 const setCurrentImage = (id: number): void => {
-    storeImage.currentImage = id;
+    storeImage.currentImageID = id;
 };
 
 watch(searchTerm, () => {

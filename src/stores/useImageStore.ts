@@ -2,9 +2,11 @@ import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 export const useImageStore = defineStore('imageStore', () => {
-    const currentImage = ref<number>();
+    const currentImageID = ref<number>();
+    const opacity = ref(1);
 
     return {
-        currentImage,
+        currentImageID,
+        opacity,
     };
 });

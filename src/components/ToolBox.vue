@@ -2,7 +2,10 @@
     <div id="mydiv" ref="mydiv">
         <q-card>
             <div id="mydivheader" ref="mydivheader">
-                <q-card-section>Click here to move</q-card-section>
+                <q-card-section>
+                    <p class="handwritten-font">TOOLBOX</p>
+                </q-card-section>
+                <q-separator />
             </div>
             <q-card-section>
                 <label>
@@ -64,6 +67,30 @@
                     step="0.001"
                     v-model="storeContext.strokeStyleA"
                 />
+                <br />
+                <label>
+                    Image Alpha - <span>{{ storeImage.opacity }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="0.001"
+                    max="1"
+                    step="0.001"
+                    v-model="storeImage.opacity"
+                />
+                <br />
+                <label>
+                    Tracing Alpha - <span>{{ storeTracing.opacity }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="0.001"
+                    max="1"
+                    step="0.001"
+                    v-model="storeTracing.opacity"
+                />
             </q-card-section>
         </q-card>
     </div>
@@ -72,7 +99,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useContextStore } from '../stores/useContextStore';
+import { useImageStore } from '../stores/useImageStore';
+import { useTracingStore } from '../stores/useTracingStore';
+
 const storeContext = useContextStore();
+const storeImage = useImageStore();
+const storeTracing = useTracingStore();
 
 const mydiv = ref<HTMLDivElement>();
 const mydivheader = ref<HTMLDivElement>();
@@ -123,5 +155,10 @@ onMounted(() => {
 #mydivheader {
     cursor: move;
     z-index: 10;
+}
+.handwritten-font {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
 }
 </style>
