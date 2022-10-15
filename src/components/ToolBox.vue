@@ -1,6 +1,6 @@
 <template>
     <div id="mydiv" ref="mydiv">
-        <q-card>
+        <q-card style="width: 10.2rem">
             <div id="mydivheader" ref="mydivheader">
                 <q-card-section>
                     <p class="handwritten-font">TOOLBOX</p>
@@ -57,38 +57,47 @@
                 />
                 <br />
                 <label>
-                    Alpha - <span>{{ storeContext.strokeStyleA }}</span>
+                    Brush Alpha -
+                    <span>{{
+                        Math.round(storeContext.strokeStyleA * 100) + '%'
+                    }}</span>
                 </label>
                 <br />
                 <input
                     type="range"
-                    min="0.001"
+                    min="0.01"
                     max="1"
-                    step="0.001"
+                    step="0.01"
                     v-model="storeContext.strokeStyleA"
                 />
                 <br />
                 <label>
-                    Image Alpha - <span>{{ storeImage.opacity }}</span>
+                    Image Alpha -
+                    <span>{{
+                        Math.round(storeImage.opacity * 100) + '%'
+                    }}</span>
                 </label>
                 <br />
                 <input
                     type="range"
-                    min="0.001"
+                    min="0.01"
                     max="1"
-                    step="0.001"
+                    step="0.01"
                     v-model="storeImage.opacity"
                 />
                 <br />
                 <label>
-                    Tracing Alpha - <span>{{ storeTracing.opacity }}</span>
+                    Tracing Alpha -
+                    <span>{{
+                        Math.round(storeTracing.opacity * 100) + '%'
+                    }}</span>
                 </label>
                 <br />
                 <input
                     type="range"
-                    min="0.001"
+                    min="0.01"
                     max="1"
-                    step="0.001"
+                    step="0.01"
                     v-model="storeTracing.opacity"
                 />
             </q-card-section>
@@ -149,6 +158,8 @@ onMounted(() => {
 <style scoped>
 #mydiv {
     position: absolute;
+    top: 30px;
+    left: 30px;
     z-index: 9;
 }
 
