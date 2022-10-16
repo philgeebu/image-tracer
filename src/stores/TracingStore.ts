@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
+import { Tracing } from '../models/main';
 
 export const useTracingStore = defineStore('tracingStore', () => {
     const mockData = [
@@ -20,12 +21,12 @@ export const useTracingStore = defineStore('tracingStore', () => {
         },
     ];
 
-    const tracings = ref(mockData);
-    const currentTracing = ref({});
+    const tracings = ref<Tracing[]>(mockData);
+    const currentTracing = ref<Tracing>();
     const tracingOpacity = ref(1);
     const imageOpacity = ref(1);
 
-    const getCurrentTracing = computed((): any => currentTracing);
+    const getCurrentTracing = computed(() => currentTracing.value);
 
     const existingTracingIndex = computed((): number => {
         return tracings.value.findIndex(

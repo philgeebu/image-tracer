@@ -126,8 +126,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useContextStore } from '../stores/useContextStore';
-import { useTracingStore } from '../stores/useTracingStore';
+import { useContextStore } from '../stores/ContextStore';
+import { useTracingStore } from '../stores/TracingStore';
 
 const storeContext = useContextStore();
 const storeTracing = useTracingStore();

@@ -25,11 +25,10 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { useContextStore } from '../stores/useContextStore';
-import { useTracingStore } from '../stores/useTracingStore';
+import { useContextStore } from '../stores/ContextStore';
+import { useTracingStore } from '../stores/TracingStore';
 
 const router = useRouter();
-
 const storeContext = useContextStore();
 const storeTracing = useTracingStore();
 

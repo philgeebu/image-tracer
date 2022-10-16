@@ -39,12 +39,12 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { useTracingStore } from '../stores/useTracingStore';
+import { useTracingStore } from '../stores/TracingStore';
 
 const storeTracing = useTracingStore();
 
 const searchTerm = ref('');
-const results = ref(<any>[]);
+const results = ref<any>([]);
 
 const getImageUrl = (name: string): string => {
     return new URL(`${name}`, import.meta.url).href;

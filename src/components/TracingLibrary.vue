@@ -10,11 +10,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import { useTracingStore } from '../stores/useTracingStore';
+import { useTracingStore } from '../stores/TracingStore';
+import { Tracing } from '../models/main';
 
 const storeTracing = useTracingStore();
 
-const setCurrentTracing = (tracing: any): void => {
+const setCurrentTracing = (tracing: Tracing): void => {
     storeTracing.currentTracing = tracing;
 };
 </script>
