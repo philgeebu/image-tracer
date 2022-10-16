@@ -3,10 +3,15 @@
         <q-card style="width: 10.2rem">
             <div id="mydivheader" ref="mydivheader">
                 <q-card-section>
-                    <p class="handwritten-font">TOOLBOX</p>
+                    <p class="handwritten-font">PALETTE</p>
                 </q-card-section>
                 <q-separator />
             </div>
+            <q-card-section>
+                <!-- <canvas width="200" height="200"></canvas> -->
+                <div class="whiteCanvasBackground"></div>
+                <canvas width="132" height="100"></canvas>
+            </q-card-section>
             <q-card-section>
                 <label>
                     Size - <span>{{ storeContext.strokeWidth }}</span>
@@ -154,6 +159,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
+canvas {
+    cursor: pointer;
+    position: absolute;
+}
 #mydiv {
     position: absolute;
     top: 30px;
@@ -169,5 +178,12 @@ onMounted(() => {
     font-size: 2rem;
     margin: 0;
     padding: 0;
+}
+.whiteCanvasBackground {
+    width: 132px;
+    height: 100px;
+    background-color: white;
+    position: relative;
+    border-radius: 7px;
 }
 </style>

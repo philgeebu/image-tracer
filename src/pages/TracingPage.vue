@@ -4,11 +4,11 @@
             <q-card-section>
                 <TracingCanvas />
             </q-card-section>
-            <ToolBox />
+            <TracingPalette />
         </q-card>
     </q-page>
 </template>
 <script setup lang="ts">
 import TracingCanvas from 'components/TracingCanvas.vue';
-import ToolBox from 'components/ToolBox.vue';
+import TracingPalette from 'components/TracingPalette.vue';
 </script>
