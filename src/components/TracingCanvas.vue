@@ -80,7 +80,7 @@ onMounted(() => {
 });
 
 watch(
-    storeTracing.currentTracing,
+    storeTracing.getCurrentTracing,
     () => {
         fetch(
             `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.imageID}`
