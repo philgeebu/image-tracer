@@ -115,7 +115,7 @@
             <q-card-actions align="around">
                 <q-btn @click="storeTracing.saveCurrentTracing()">Save</q-btn>
                 <q-btn
-                    v-if="storeTracing.currentTracingExists"
+                    v-if="storeTracing.currentTracingInLibrary"
                     @click="storeTracing.removeCurrentTracing()"
                     >Delete</q-btn
                 >
