@@ -40,11 +40,10 @@ export const useContextStore = defineStore('contextStore', () => {
         strokeStyleA.value = 1;
     };
 
-    watch(strokeWidth, () => setStrokeStyle());
-    watch(strokeStyleR, () => setStrokeStyle());
-    watch(strokeStyleG, () => setStrokeStyle());
-    watch(strokeStyleB, () => setStrokeStyle());
-    watch(strokeStyleA, () => setStrokeStyle());
+    watch(
+        [strokeWidth, strokeStyleR, strokeStyleG, strokeStyleB, strokeStyleA],
+        () => setStrokeStyle()
+    );
 
     return {
         tracingContext,
