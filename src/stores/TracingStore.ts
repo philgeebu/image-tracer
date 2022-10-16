@@ -26,7 +26,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
     const tracingOpacity = ref(1);
     const imageOpacity = ref(1);
 
-    const getCurrentTracing = computed(() => currentTracing.value);
+    const getCurrentTracing = computed(() => currentTracing);
 
     const existingTracingIndex = computed((): number => {
         return tracings.value.findIndex(
