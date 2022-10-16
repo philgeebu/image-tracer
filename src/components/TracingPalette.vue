@@ -140,10 +140,6 @@ const paletteCanvas = ref<HTMLCanvasElement>();
 const myPalette = ref<HTMLDivElement>();
 const myPaletteHeader = ref<HTMLDivElement>();
 
-const clearCanvas = (): void => {
-    storeContext.paletteContext.clearRect(0, 0, 132, 100);
-};
-
 const drawLine = (
     context: any,
     x1: number,
@@ -190,7 +186,7 @@ const onMouseUp = (e: any) => {
         x.value = 0;
         y.value = 0;
         isDrawing.value = false;
-        clearCanvas();
+        storeContext.paletteContext.clearRect(0, 0, 132, 100);
     }
 };
 
