@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 
 export const useTracingStore = defineStore('tracingStore', () => {
@@ -20,13 +20,18 @@ export const useTracingStore = defineStore('tracingStore', () => {
         },
     ];
 
-    const opacity = ref(1);
-    const currentTracing = ref({});
     const tracings = ref(mockData);
+    const currentTracing = ref({});
+    const tracingOpacity = ref(1);
+    const imageOpacity = ref(1);
+
+    const getCurrentTracing = computed(() => currentTracing);
 
     return {
-        opacity,
-        currentTracing,
         tracings,
+        currentTracing,
+        tracingOpacity,
+        imageOpacity,
+        getCurrentTracing,
     };
 });

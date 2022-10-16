@@ -3,7 +3,7 @@
         <h2 class="handwritten-font">Library</h2>
         <div v-for="tracing in storeTracing.tracings" :key="tracing.imageID">
             <q-separator />
-            <router-link to="/trace" @click="setCurrentImage(tracing.imageID)">
+            <router-link to="/trace" @click="setCurrentTracing(tracing)">
                 <img :src="tracing.previewURL" class="q-pa-sm" />
             </router-link>
         </div>
@@ -11,12 +11,10 @@
 </template>
 <script setup lang="ts">
 import { useTracingStore } from '../stores/useTracingStore';
-import { useImageStore } from '../stores/useImageStore';
 
 const storeTracing = useTracingStore();
-const storeImage = useImageStore();
 
-const setCurrentImage = (id: number): void => {
-    storeImage.currentImageID = id;
+const setCurrentTracing = (tracing: any): void => {
+    storeTracing.currentTracing = tracing;
 };
 </script>

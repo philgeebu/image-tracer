@@ -21,10 +21,7 @@
         <div v-for="result in results" :key="result.id">
             <q-card-section>
                 <div class="row justify-center">
-                    <router-link
-                        to="/trace"
-                        @click="setCurrentImage(result.id)"
-                    >
+                    <router-link to="/trace" @click="setCurrentTracing(result)">
                         <img :src="getImageUrl(result.webformatURL)" />
                     </router-link>
                 </div>
@@ -42,9 +39,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { useImageStore } from '../stores/useImageStore';
+import { useTracingStore } from '../stores/useTracingStore';
 
-const storeImage = useImageStore();
+const storeTracing = useTracingStore();
 
 const searchTerm = ref('');
 const results = ref(<any>[]);
@@ -53,8 +50,11 @@ const getImageUrl = (name: string): string => {
     return new URL(`${name}`, import.meta.url).href;
 };
 
-const setCurrentImage = (id: number): void => {
-    storeImage.currentImageID = id;
+const setCurrentTracing = (result: any): void => {
+    storeTracing.currentTracing = {
+        imageID: result.id,
+        previewURL: result.previewURL,
+    };
 };
 
 const clear = (): void => {
@@ -76,6 +76,7 @@ watch(searchTerm, () => {
     } else clear();
 });
 </script>
+
 <style scoped>
 img {
     opacity: 0.75;

@@ -1,6 +1,6 @@
 <template>
     <canvas
-        :style="'opacity: ' + storeTracing.opacity"
+        :style="'opacity: ' + storeTracing.tracingOpacity"
         :width="canvasWidth + 40"
         :height="canvasHeight + 40"
         ref="tracingCanvas"
@@ -9,7 +9,7 @@
         @mouseup="onMouseUp($event)"
     >
     </canvas>
-    <img :src="imageSource" :style="'opacity: ' + storeImage.opacity" />
+    <img :src="imageSource" :style="'opacity: ' + storeTracing.imageOpacity" />
     <div
         class="whiteCanvasBackground"
         :style="
@@ -25,11 +25,9 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
 import { useContextStore } from '../stores/useContextStore';
-import { useImageStore } from '../stores/useImageStore';
 import { useTracingStore } from '../stores/useTracingStore';
 
 const storeContext = useContextStore();
-const storeImage = useImageStore();
 const storeTracing = useTracingStore();
 
 const tracingCanvas = ref<HTMLCanvasElement>();
@@ -82,10 +80,10 @@ onMounted(() => {
 });
 
 watch(
-    storeImage.getCurrentImageID,
+    storeTracing.currentTracing,
     () => {
         fetch(
-            `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeImage.currentImageID}`
+            `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.imageID}`
         )
             .then((response) => response.json())
             .then((data) => {

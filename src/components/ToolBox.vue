@@ -74,7 +74,7 @@
                 <label>
                     Image Alpha -
                     <span>{{
-                        Math.round(storeImage.opacity * 100) + '%'
+                        Math.round(storeTracing.imageOpacity * 100) + '%'
                     }}</span>
                 </label>
                 <br />
@@ -83,13 +83,13 @@
                     min="0.01"
                     max="1"
                     step="0.01"
-                    v-model="storeImage.opacity"
+                    v-model="storeTracing.imageOpacity"
                 />
                 <br />
                 <label>
                     Tracing Alpha -
                     <span>{{
-                        Math.round(storeTracing.opacity * 100) + '%'
+                        Math.round(storeTracing.tracingOpacity * 100) + '%'
                     }}</span>
                 </label>
                 <br />
@@ -98,7 +98,7 @@
                     min="0.01"
                     max="1"
                     step="0.01"
-                    v-model="storeTracing.opacity"
+                    v-model="storeTracing.tracingOpacity"
                 />
             </q-card-section>
         </q-card>
@@ -108,11 +108,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useContextStore } from '../stores/useContextStore';
-import { useImageStore } from '../stores/useImageStore';
 import { useTracingStore } from '../stores/useTracingStore';
 
 const storeContext = useContextStore();
-const storeImage = useImageStore();
 const storeTracing = useTracingStore();
 
 const mydiv = ref<HTMLDivElement>();
