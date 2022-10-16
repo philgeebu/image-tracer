@@ -33,7 +33,7 @@
         <p class="q-mb-xs">Welcome to</p>
         <p class="handwritten-font text-grey-3">imageTracer</p>
         <p class="q-mt-lg">Search for an image you like</p>
-        <p class="handwritten-font text-grey-4">and TRACE!</p>
+        <p class="handwritten-font text-grey-4">and TRACE IT!</p>
     </div>
 </template>
 
