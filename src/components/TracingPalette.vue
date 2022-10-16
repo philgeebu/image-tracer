@@ -113,8 +113,12 @@
                 />
             </q-card-section>
             <q-card-actions align="around">
-                <q-btn flat>Update</q-btn>
-                <q-btn flat>Delete</q-btn>
+                <q-btn @click="storeTracing.saveCurrentTracing()">Save</q-btn>
+                <q-btn
+                    v-if="storeTracing.currentTracingExists"
+                    @click="storeTracing.removeCurrentTracing()"
+                    >Delete</q-btn
+                >
             </q-card-actions>
         </q-card>
     </div>

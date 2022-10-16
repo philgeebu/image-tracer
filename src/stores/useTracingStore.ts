@@ -25,11 +25,33 @@ export const useTracingStore = defineStore('tracingStore', () => {
     const tracingOpacity = ref(1);
     const imageOpacity = ref(1);
 
-    const getCurrentTracing = computed(() => currentTracing);
+    const getCurrentTracing = computed((): any => currentTracing);
+
+    const existingTracingIndex = computed((): number => {
+        return tracings.value.findIndex(
+            (t) => t.imageID === currentTracing.value.imageID
+        );
+    });
+
+    const currentTracingExists = computed((): boolean => {
+        return Boolean(existingTracingIndex.value != -1);
+    });
+
+    const saveCurrentTracing = (): void => {
+        if (currentTracingExists.value)
+            tracings.value[existingTracingIndex.value] = currentTracing.value;
+        else tracings.value.push(currentTracing.value);
+    };
+
+    const removeCurrentTracing = (): void => {
+        if (confirm('Are you sure?'))
+            tracings.value.splice(existingTracingIndex.value, 1);
+    };
 
     const resetTracingOpacity = (): void => {
         tracingOpacity.value = 1;
     };
+
     const resetImageOpacity = (): void => {
         imageOpacity.value = 1;
     };
@@ -40,6 +62,9 @@ export const useTracingStore = defineStore('tracingStore', () => {
         tracingOpacity,
         imageOpacity,
         getCurrentTracing,
+        currentTracingExists,
+        saveCurrentTracing,
+        removeCurrentTracing,
         resetTracingOpacity,
         resetImageOpacity,
     };
