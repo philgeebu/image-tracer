@@ -2,15 +2,16 @@ import { ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 
 export const useContextStore = defineStore('contextStore', () => {
+    // STATE
     const tracingContext = ref<any>();
     const paletteContext = ref<any>();
-
     const strokeWidth = ref(1);
     const strokeStyleR = ref(0);
     const strokeStyleG = ref(0);
     const strokeStyleB = ref(0);
     const strokeStyleA = ref(1);
 
+    // ACTIONS
     const setStrokeStyle = (): void => {
         const rgbaString =
             'rgba(' +
@@ -46,6 +47,7 @@ export const useContextStore = defineStore('contextStore', () => {
     );
 
     return {
+        // STATE
         tracingContext,
         paletteContext,
         strokeWidth,
@@ -53,6 +55,7 @@ export const useContextStore = defineStore('contextStore', () => {
         strokeStyleG,
         strokeStyleB,
         strokeStyleA,
+        // ACTIONS
         resetStrokeStyle,
     };
 });
