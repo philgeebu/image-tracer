@@ -90,6 +90,7 @@ const onMouseUp = (e: any) => {
 };
 
 onMounted(() => {
+    storeTracing.canvasElement = tracingCanvas.value;
     storeContext.tracingContext = tracingCanvas.value.getContext('2d');
 });
 

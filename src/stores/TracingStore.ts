@@ -21,11 +21,11 @@ export const useTracingStore = defineStore('tracingStore', () => {
         },
     ];
 
+    const canvasElement = ref<HTMLCanvasElement>();
     const tracings = ref<Tracing[]>(mockData);
     const currentTracing = ref<Tracing>({
         imageID: 0,
         previewURL: '',
-        canvas: '',
     });
     const tracingOpacity = ref(1);
     const imageOpacity = ref(1);
@@ -43,7 +43,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
     });
 
     const saveCurrentTracing = (): void => {
-        currentTracing.value.canvas = '';
+        currentTracing.value.canvas = canvasElement.value.toDataURL();
         if (currentTracingInLibrary.value) {
             tracings.value[existingTracingIndex.value] = currentTracing.value;
         } else tracings.value.push(currentTracing.value);
@@ -63,6 +63,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
     };
 
     return {
+        canvasElement,
         tracings,
         currentTracing,
         tracingOpacity,
