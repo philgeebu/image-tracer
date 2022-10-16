@@ -96,7 +96,7 @@ onMounted(() => {
 watch(
     storeTracing.getCurrentTracing,
     async (newValue: any, oldValue: any) => {
-        if (!newValue.imageID) return router.push('/');
+        if (!newValue || !newValue.imageID) return router.push('/');
         if (!oldValue || oldValue.imageID != newValue.imageID) {
             const response = await fetch(
                 `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.imageID}`
