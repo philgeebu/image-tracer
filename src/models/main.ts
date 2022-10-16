@@ -1,5 +1,5 @@
 export interface Tracing {
     imageID: number;
-    previewURL: string;
-    canvas?: 'image/png';
+    previewURL?: string;
+    canvas?: HTMLImageElement;
 }

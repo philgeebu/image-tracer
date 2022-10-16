@@ -113,6 +113,19 @@ watch(
             storeTracing.resetImageOpacity();
             storeTracing.resetTracingOpacity();
         }
+        storeContext.tracingContext.clearRect(
+            0,
+            0,
+            canvasWidth.value,
+            canvasHeight.value
+        );
+        if (newValue.canvas) {
+            storeContext.tracingContext.drawImage(
+                storeTracing.currentTracing.canvas,
+                0,
+                0
+            );
+        }
     },
     { immediate: true }
 );

@@ -25,7 +25,6 @@ export const useTracingStore = defineStore('tracingStore', () => {
     const tracings = ref<Tracing[]>(mockData);
     const currentTracing = ref<Tracing>({
         imageID: 0,
-        previewURL: '',
     });
     const tracingOpacity = ref(1);
     const imageOpacity = ref(1);
@@ -43,7 +42,9 @@ export const useTracingStore = defineStore('tracingStore', () => {
     });
 
     const saveCurrentTracing = (): void => {
-        currentTracing.value.canvas = canvasElement.value.toDataURL();
+        const img = new Image();
+        img.src = canvasElement.value.toDataURL();
+        currentTracing.value.canvas = img;
         if (currentTracingInLibrary.value) {
             tracings.value[existingTracingIndex.value] = currentTracing.value;
         } else tracings.value.push(currentTracing.value);
