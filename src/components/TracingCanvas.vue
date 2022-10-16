@@ -63,7 +63,13 @@ const onMouseDown = (e: any) => {
 
 const onMouseMove = (e: any) => {
     if (isDrawing.value === true) {
-        drawLine(storeContext.context, x.value, y.value, e.offsetX, e.offsetY);
+        drawLine(
+            storeContext.tracingContext,
+            x.value,
+            y.value,
+            e.offsetX,
+            e.offsetY
+        );
         x.value = e.offsetX;
         y.value = e.offsetY;
     }
@@ -71,7 +77,13 @@ const onMouseMove = (e: any) => {
 
 const onMouseUp = (e: any) => {
     if (isDrawing.value === true) {
-        drawLine(storeContext.context, x.value, y.value, e.offsetX, e.offsetY);
+        drawLine(
+            storeContext.tracingContext,
+            x.value,
+            y.value,
+            e.offsetX,
+            e.offsetY
+        );
         x.value = 0;
         y.value = 0;
         isDrawing.value = false;
@@ -79,7 +91,7 @@ const onMouseUp = (e: any) => {
 };
 
 onMounted(() => {
-    storeContext.context = tracingCanvas.value.getContext('2d');
+    storeContext.tracingContext = tracingCanvas.value.getContext('2d');
 });
 
 watch(

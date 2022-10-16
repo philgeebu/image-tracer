@@ -7,9 +7,16 @@
                 </q-card-section>
                 <q-separator />
             </div>
-            <q-card-section>
+            <q-card-section class="q-pb-none">
                 <div class="whiteCanvasBackground"></div>
-                <canvas width="132" height="100"></canvas>
+                <canvas
+                    width="132"
+                    height="100"
+                    ref="paletteCanvas"
+                    @mousedown="onMouseDown($event)"
+                    @mousemove="onMouseMove($event)"
+                    @mouseup="onMouseUp($event)"
+                ></canvas>
             </q-card-section>
             <q-card-section>
                 <label>
@@ -105,6 +112,10 @@
                     v-model="storeTracing.tracingOpacity"
                 />
             </q-card-section>
+            <q-card-actions align="around">
+                <q-btn flat>Update</q-btn>
+                <q-btn flat>Delete</q-btn>
+            </q-card-actions>
         </q-card>
     </div>
 </template>
@@ -117,10 +128,70 @@ import { useTracingStore } from '../stores/useTracingStore';
 const storeContext = useContextStore();
 const storeTracing = useTracingStore();
 
+const x = ref(0);
+const y = ref(0);
+const isDrawing = ref(false);
+
+const paletteCanvas = ref<HTMLCanvasElement>();
 const mydiv = ref<HTMLDivElement>();
 const mydivheader = ref<HTMLDivElement>();
 
+const clearCanvas = (): void => {
+    storeContext.paletteContext.clearRect(0, 0, 132, 100);
+};
+
+const drawLine = (
+    context: any,
+    x1: number,
+    y1: number,
+    x2: number,
+    y2: number
+) => {
+    context.beginPath();
+    context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+    context.stroke();
+    context.closePath();
+};
+
+const onMouseDown = (e: any) => {
+    x.value = e.offsetX;
+    y.value = e.offsetY;
+    isDrawing.value = true;
+};
+
+const onMouseMove = (e: any) => {
+    if (isDrawing.value === true) {
+        drawLine(
+            storeContext.paletteContext,
+            x.value,
+            y.value,
+            e.offsetX,
+            e.offsetY
+        );
+        x.value = e.offsetX;
+        y.value = e.offsetY;
+    }
+};
+
+const onMouseUp = (e: any) => {
+    if (isDrawing.value === true) {
+        drawLine(
+            storeContext.paletteContext,
+            x.value,
+            y.value,
+            e.offsetX,
+            e.offsetY
+        );
+        x.value = 0;
+        y.value = 0;
+        isDrawing.value = false;
+        clearCanvas();
+    }
+};
+
 onMounted(() => {
+    storeContext.paletteContext = paletteCanvas.value.getContext('2d');
     const dragElement = (element: any) => {
         let p1 = 0,
             p2 = 0,

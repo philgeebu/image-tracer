@@ -2,7 +2,9 @@ import { ref, watch } from 'vue';
 import { defineStore } from 'pinia';
 
 export const useContextStore = defineStore('contextStore', () => {
-    const context = ref<any>();
+    const tracingContext = ref<any>();
+    const paletteContext = ref<any>();
+
     const strokeWidth = ref(1);
     const strokeStyleR = ref(0);
     const strokeStyleG = ref(0);
@@ -20,9 +22,14 @@ export const useContextStore = defineStore('contextStore', () => {
             ',' +
             strokeStyleA.value +
             ')';
-        context.value.strokeStyle = rgbaString;
-        context.value.lineCap = 'round';
-        context.value.lineWidth = strokeWidth.value;
+
+        tracingContext.value.strokeStyle = rgbaString;
+        tracingContext.value.lineCap = 'round';
+        tracingContext.value.lineWidth = strokeWidth.value;
+
+        paletteContext.value.strokeStyle = rgbaString;
+        paletteContext.value.lineCap = 'round';
+        paletteContext.value.lineWidth = strokeWidth.value;
     };
 
     const resetStrokeStyle = (): void => {
@@ -40,7 +47,8 @@ export const useContextStore = defineStore('contextStore', () => {
     watch(strokeStyleA, () => setStrokeStyle());
 
     return {
-        context,
+        tracingContext,
+        paletteContext,
         strokeWidth,
         strokeStyleR,
         strokeStyleG,
