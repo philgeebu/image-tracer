@@ -90,10 +90,13 @@ watch(
             const response = await fetch(
                 `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.imageID}`
             );
+
             const data = await response.json();
+
             imageSource.value = data.hits[0].webformatURL;
             canvasWidth.value = data.hits[0].webformatWidth;
             canvasHeight.value = data.hits[0].webformatHeight;
+
             storeContext.resetStrokeStyle();
             storeTracing.resetImageOpacity();
             storeTracing.resetTracingOpacity();

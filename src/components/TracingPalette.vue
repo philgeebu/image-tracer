@@ -8,7 +8,6 @@
                 <q-separator />
             </div>
             <q-card-section>
-                <!-- <canvas width="200" height="200"></canvas> -->
                 <div class="whiteCanvasBackground"></div>
                 <canvas width="132" height="100"></canvas>
             </q-card-section>
@@ -161,7 +160,7 @@ onMounted(() => {
 <style scoped>
 canvas {
     cursor: pointer;
-    position: absolute;
+    position: relative;
 }
 #mydiv {
     position: absolute;
@@ -183,7 +182,7 @@ canvas {
     width: 132px;
     height: 100px;
     background-color: white;
-    position: relative;
     border-radius: 7px;
+    position: absolute;
 }
 </style>
