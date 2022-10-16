@@ -7,7 +7,10 @@
                     debounce="500"
                     placeholder="Search for an image..."
                 >
-                    <template v-slot:append>
+                    <template v-slot:append v-if="searchTerm">
+                        <q-icon name="clear" @click="clear()" />
+                    </template>
+                    <template v-slot:append v-else>
                         <q-icon name="search" />
                     </template>
                 </q-input>
@@ -22,13 +25,19 @@
                         to="/trace"
                         @click="setCurrentImage(result.id)"
                     >
-                        <img :src="getImageUrl(result.webformatURL)" alt=""
-                    /></router-link>
+                        <img :src="getImageUrl(result.webformatURL)" />
+                    </router-link>
                 </div>
             </q-card-section>
             <q-separator />
         </div>
     </q-card>
+    <div v-else class="text-center q-mt-xl text-grey-5">
+        <p class="q-mb-xs">Welcome to</p>
+        <p class="handwritten-font text-grey-3">imageTracer</p>
+        <p class="q-mt-lg">Search for an image you like</p>
+        <p class="handwritten-font text-grey-4">and TRACE!</p>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -48,15 +57,39 @@ const setCurrentImage = (id: number): void => {
     storeImage.currentImageID = id;
 };
 
+const clear = (): void => {
+    searchTerm.value = '';
+    results.value = [];
+};
+
 watch(searchTerm, () => {
-    fetch(
-        `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&q=${encodeURIComponent(
-            searchTerm.value
-        )}&image_type=photo`
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            results.value = data.hits;
-        });
+    if (searchTerm.value) {
+        fetch(
+            `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&q=${encodeURIComponent(
+                searchTerm.value
+            )}&image_type=photo`
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                results.value = data.hits;
+            });
+    } else clear();
 });
 </script>
+<style scoped>
+img {
+    opacity: 0.75;
+    transition: 0.5s ease;
+}
+img:hover {
+    opacity: 1;
+    transition: 0.5s ease;
+}
+p {
+    font-size: 1.2rem;
+}
+.handwritten-font {
+    margin: 0;
+    font-size: 7rem;
+}
+</style>
