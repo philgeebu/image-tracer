@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useContextStore } from '../stores/useContextStore';
 import { useImageStore } from '../stores/useImageStore';
 import { useTracingStore } from '../stores/useTracingStore';
@@ -79,18 +79,24 @@ const onMouseUp = (e: any) => {
 
 onMounted(() => {
     storeContext.context = tracingCanvas.value.getContext('2d');
-
-    fetch(
-        `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeImage.currentImageID}`
-    )
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            imageSource.value = data.hits[0].webformatURL;
-            canvasWidth.value = data.hits[0].webformatWidth;
-            canvasHeight.value = data.hits[0].webformatHeight;
-        });
 });
+
+watch(
+    storeImage.getCurrentImageID,
+    () => {
+        fetch(
+            `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeImage.currentImageID}`
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                imageSource.value = data.hits[0].webformatURL;
+                canvasWidth.value = data.hits[0].webformatWidth;
+                canvasHeight.value = data.hits[0].webformatHeight;
+            });
+    },
+    { immediate: true }
+);
 </script>
 
 <style scoped>
