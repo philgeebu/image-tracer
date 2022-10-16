@@ -1,7 +1,7 @@
 <template>
-    <div id="mydiv" ref="mydiv">
+    <div id="myPalette" ref="myPalette">
         <q-card style="width: 10.2rem">
-            <div id="mydivheader" ref="mydivheader">
+            <div id="myPaletteHeader" ref="myPaletteHeader">
                 <q-card-section>
                     <p class="handwritten-font">PALETTE</p>
                 </q-card-section>
@@ -137,8 +137,8 @@ const y = ref(0);
 const isDrawing = ref(false);
 
 const paletteCanvas = ref<HTMLCanvasElement>();
-const mydiv = ref<HTMLDivElement>();
-const mydivheader = ref<HTMLDivElement>();
+const myPalette = ref<HTMLDivElement>();
+const myPaletteHeader = ref<HTMLDivElement>();
 
 const clearCanvas = (): void => {
     storeContext.paletteContext.clearRect(0, 0, 132, 100);
@@ -225,10 +225,10 @@ onMounted(() => {
             document.onmousemove = null;
         };
 
-        mydivheader.value.onmousedown = dragMouseDown;
+        myPaletteHeader.value.onmousedown = dragMouseDown;
     };
 
-    dragElement(mydiv.value);
+    dragElement(myPalette.value);
 });
 </script>
 
@@ -237,14 +237,14 @@ canvas {
     cursor: pointer;
     position: relative;
 }
-#mydiv {
+#myPalette {
     position: absolute;
     top: 30px;
     left: 30px;
     z-index: 9;
 }
 
-#mydivheader {
+#myPaletteHeader {
     cursor: move;
     z-index: 10;
 }
