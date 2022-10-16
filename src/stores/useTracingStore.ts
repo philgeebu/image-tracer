@@ -27,11 +27,20 @@ export const useTracingStore = defineStore('tracingStore', () => {
 
     const getCurrentTracing = computed(() => currentTracing);
 
+    const resetTracingOpacity = (): void => {
+        tracingOpacity.value = 1;
+    };
+    const resetImageOpacity = (): void => {
+        imageOpacity.value = 1;
+    };
+
     return {
         tracings,
         currentTracing,
         tracingOpacity,
         imageOpacity,
         getCurrentTracing,
+        resetTracingOpacity,
+        resetImageOpacity,
     };
 });

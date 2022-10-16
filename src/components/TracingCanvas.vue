@@ -24,8 +24,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue';
+import { useRouter } from 'vue-router';
 import { useContextStore } from '../stores/useContextStore';
 import { useTracingStore } from '../stores/useTracingStore';
+
+const router = useRouter();
 
 const storeContext = useContextStore();
 const storeTracing = useTracingStore();
@@ -81,17 +84,20 @@ onMounted(() => {
 
 watch(
     storeTracing.getCurrentTracing,
-    () => {
-        fetch(
-            `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.imageID}`
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                imageSource.value = data.hits[0].webformatURL;
-                canvasWidth.value = data.hits[0].webformatWidth;
-                canvasHeight.value = data.hits[0].webformatHeight;
-            });
+    async (newValue: any, oldValue: any) => {
+        if (!newValue.imageID) return router.push('/');
+        if (!oldValue || oldValue.imageID != newValue.imageID) {
+            const response = await fetch(
+                `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.imageID}`
+            );
+            const data = await response.json();
+            imageSource.value = data.hits[0].webformatURL;
+            canvasWidth.value = data.hits[0].webformatWidth;
+            canvasHeight.value = data.hits[0].webformatHeight;
+            storeContext.resetStrokeStyle();
+            storeTracing.resetImageOpacity();
+            storeTracing.resetTracingOpacity();
+        }
     },
     { immediate: true }
 );
