@@ -8,10 +8,7 @@
                 <q-separator />
             </div>
             <q-card-actions align="around">
-                <q-btn>Clear</q-btn>
-                <q-btn v-if="storeTracing.currentTracingInLibrary"
-                    >Revert</q-btn
-                >
+                <q-btn @click="storeTracing.clearCanvas()">Clear Tracing</q-btn>
             </q-card-actions>
             <q-card-section class="q-pb-none">
                 <div class="whiteCanvasBackground"></div>
@@ -125,6 +122,12 @@
                     @click="storeTracing.removeCurrentTracing()"
                     >Delete</q-btn
                 >
+            </q-card-actions>
+            <q-card-actions
+                align="around"
+                v-if="storeTracing.currentTracingInLibrary"
+            >
+                <q-btn>Export Tracing</q-btn>
             </q-card-actions>
         </q-card>
     </div>

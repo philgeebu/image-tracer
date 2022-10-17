@@ -77,6 +77,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
         getCurrentTracing,
         currentTracingInLibrary,
         // ACTIONS
+        clearCanvas,
         saveCurrentTracing,
         removeCurrentTracing,
         resetTracingOpacity,
