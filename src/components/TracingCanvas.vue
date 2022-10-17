@@ -100,7 +100,8 @@ onMounted(() => {
 
     if (storeTracing.currentTracing.canvas) {
         tracing.src = storeTracing.currentTracing.canvas;
-        storeContext.tracingContext.drawImage(tracing, 0, 0);
+        tracing.onload = () =>
+            storeContext.tracingContext.drawImage(tracing, 0, 0);
     }
 });
 </script>
