@@ -1,22 +1,25 @@
 <template>
     <canvas
         :style="'opacity: ' + storeTracing.tracingOpacity"
-        :width="storeTracing.canvasWidth + 40"
-        :height="storeTracing.canvasHeight + 40"
+        :width="storeTracing.currentTracing.webformatWidth + 40"
+        :height="storeTracing.currentTracing.webformatHeight + 40"
         ref="tracingCanvas"
         @mousedown="onMouseDown($event)"
         @mousemove="onMouseMove($event)"
         @mouseup="onMouseUp($event)"
     >
     </canvas>
-    <img :src="imageSource" :style="'opacity: ' + storeTracing.imageOpacity" />
+    <img
+        :src="storeTracing.currentTracing.webformatURL"
+        :style="'opacity: ' + storeTracing.imageOpacity"
+    />
     <div
         class="whiteCanvasBackground"
         :style="
             'width: ' +
-            (storeTracing.canvasWidth + 40) +
+            (storeTracing.currentTracing.webformatWidth + 40) +
             'px; height: ' +
-            (storeTracing.canvasHeight + 40) +
+            (storeTracing.currentTracing.webformatHeight + 40) +
             'px;'
         "
     ></div>
@@ -36,7 +39,6 @@ const tracingCanvas = ref<HTMLCanvasElement>();
 const x = ref(0);
 const y = ref(0);
 const isDrawing = ref(false);
-const imageSource = ref<string>();
 
 const drawLine = (
     context: any,
@@ -94,29 +96,18 @@ onMounted(() => {
 
 watch(
     storeTracing.getCurrentTracing,
-    async (newValue: any) => {
+    (newValue: any) => {
         if (!newValue || !newValue.id) return router.push('/');
-        else {
-            const response = await fetch(
-                `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.id}`
-            );
 
-            const data = await response.json();
-            console.log(data.hits[0]);
-            imageSource.value = data.hits[0].webformatURL;
-            storeTracing.canvasWidth = data.hits[0].webformatWidth;
-            storeTracing.canvasHeight = data.hits[0].webformatHeight;
+        storeContext.resetStrokeStyle();
+        storeTracing.resetImageOpacity();
+        storeTracing.resetTracingOpacity();
+        // storeTracing.clearCanvas();
 
-            storeContext.resetStrokeStyle();
-            storeTracing.resetImageOpacity();
-            storeTracing.resetTracingOpacity();
-            storeTracing.clearCanvas();
-
-            if (newValue.canvas) {
-                const tracing = new Image();
-                tracing.src = await newValue.canvas;
-                storeContext.tracingContext.drawImage(tracing, 0, 0);
-            }
+        if (newValue.canvas) {
+            const tracing = new Image();
+            tracing.src = newValue.canvas;
+            storeContext.tracingContext.drawImage(tracing, 0, 0);
         }
     },
     { immediate: true }
