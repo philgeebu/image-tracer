@@ -7,6 +7,8 @@
                 <img :src="tracing.previewURL" class="q-pa-sm" />
             </router-link>
         </div>
+        <q-separator />
+        <q-btn @click="saveToLocalStorage()" label="Save" class="q-mt-xl" />
     </div>
 </template>
 <script setup lang="ts">
@@ -15,7 +17,19 @@ import { Tracing } from '../models/main';
 
 const storeTracing = useTracingStore();
 
+if (window.localStorage.getItem('term_project_Gee'))
+    storeTracing.tracings = JSON.parse(
+        window.localStorage.getItem('term_project_Gee')
+    );
+
 const setCurrentTracing = (tracing: Tracing): void => {
     storeTracing.currentTracing = tracing;
+};
+
+const saveToLocalStorage = (): void => {
+    window.localStorage.setItem(
+        'term_project_Gee',
+        JSON.stringify(storeTracing.tracings)
+    );
 };
 </script>
