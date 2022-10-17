@@ -21,7 +21,10 @@
         <div v-for="result in results" :key="result.id">
             <q-card-section>
                 <div class="row justify-center">
-                    <router-link to="/trace" @click="setCurrentTracing(result)">
+                    <router-link
+                        :to="'/' + result.id"
+                        @click="setCurrentTracing(result)"
+                    >
                         <img :src="result.webformatURL" />
                     </router-link>
                 </div>

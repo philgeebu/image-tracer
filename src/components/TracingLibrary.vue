@@ -3,7 +3,10 @@
         <h2 class="handwritten-font">Library</h2>
         <div v-for="tracing in storeTracing.tracings" :key="tracing.id">
             <q-separator />
-            <router-link to="/trace" @click="setCurrentTracing(tracing)">
+            <router-link
+                :to="'/' + tracing.id"
+                @click="setCurrentTracing(tracing)"
+            >
                 <img :src="tracing.previewURL" class="q-pa-sm" />
             </router-link>
         </div>
