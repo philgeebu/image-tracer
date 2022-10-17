@@ -7,6 +7,12 @@
                 </q-card-section>
                 <q-separator />
             </div>
+            <q-card-actions align="around">
+                <q-btn>Clear</q-btn>
+                <q-btn v-if="storeTracing.currentTracingInLibrary"
+                    >Revert</q-btn
+                >
+            </q-card-actions>
             <q-card-section class="q-pb-none">
                 <div class="whiteCanvasBackground"></div>
                 <canvas

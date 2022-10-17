@@ -1,8 +1,8 @@
 <template>
     <canvas
         :style="'opacity: ' + storeTracing.tracingOpacity"
-        :width="canvasWidth + 40"
-        :height="canvasHeight + 40"
+        :width="storeTracing.canvasWidth + 40"
+        :height="storeTracing.canvasHeight + 40"
         ref="tracingCanvas"
         @mousedown="onMouseDown($event)"
         @mousemove="onMouseMove($event)"
@@ -14,9 +14,9 @@
         class="whiteCanvasBackground"
         :style="
             'width: ' +
-            (canvasWidth + 40) +
+            (storeTracing.canvasWidth + 40) +
             'px; height: ' +
-            (canvasHeight + 40) +
+            (storeTracing.canvasHeight + 40) +
             'px;'
         "
     ></div>
@@ -37,8 +37,6 @@ const x = ref(0);
 const y = ref(0);
 const isDrawing = ref(false);
 const imageSource = ref<string>();
-const canvasWidth = ref(600);
-const canvasHeight = ref(600);
 
 const drawLine = (
     context: any,
@@ -91,7 +89,7 @@ const onMouseUp = (e: any) => {
 
 onMounted(() => {
     storeTracing.canvasElement = tracingCanvas.value;
-    storeContext.tracingContext = tracingCanvas.value.getContext('2d');
+    storeContext.tracingContext = storeTracing.canvasElement.getContext('2d');
 });
 
 watch(
@@ -106,8 +104,8 @@ watch(
             const data = await response.json();
 
             imageSource.value = data.hits[0].webformatURL;
-            canvasWidth.value = data.hits[0].webformatWidth;
-            canvasHeight.value = data.hits[0].webformatHeight;
+            storeTracing.canvasWidth = data.hits[0].webformatWidth;
+            storeTracing.canvasHeight = data.hits[0].webformatHeight;
 
             storeContext.resetStrokeStyle();
             storeTracing.resetImageOpacity();
@@ -116,8 +114,8 @@ watch(
         storeContext.tracingContext.clearRect(
             0,
             0,
-            canvasWidth.value,
-            canvasHeight.value
+            storeTracing.canvasWidth,
+            storeTracing.canvasHeight
         );
         if (newValue.canvas) {
             storeContext.tracingContext.drawImage(

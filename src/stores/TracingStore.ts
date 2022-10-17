@@ -6,6 +6,8 @@ import { TRACINGS } from './mock-data';
 export const useTracingStore = defineStore('tracingStore', () => {
     // STATE
     const canvasElement = ref<HTMLCanvasElement>();
+    const canvasWidth = ref(0);
+    const canvasHeight = ref(0);
     const tracings = ref<Tracing[]>(TRACINGS);
     const currentTracing = ref<Tracing>({
         imageID: 0,
@@ -27,6 +29,11 @@ export const useTracingStore = defineStore('tracingStore', () => {
     );
 
     // ACTIONS
+    const clearCanvas = (): void => {
+        const context = canvasElement.value.getContext('2d');
+        context.clearRect(0, 0, canvasWidth.value, canvasHeight.value);
+    };
+
     const saveCurrentTracing = (): void => {
         try {
             const img = new Image();
@@ -43,8 +50,10 @@ export const useTracingStore = defineStore('tracingStore', () => {
     };
 
     const removeCurrentTracing = (): void => {
-        if (confirm('Are you sure?'))
+        if (confirm('Are you sure?')) {
             tracings.value.splice(existingTracingIndex.value, 1);
+            clearCanvas();
+        }
     };
 
     const resetTracingOpacity = (): void => {
@@ -58,6 +67,8 @@ export const useTracingStore = defineStore('tracingStore', () => {
     return {
         // STATE
         canvasElement,
+        canvasWidth,
+        canvasHeight,
         tracings,
         currentTracing,
         tracingOpacity,
