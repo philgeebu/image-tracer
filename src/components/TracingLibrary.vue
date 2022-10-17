@@ -1,7 +1,7 @@
 <template>
     <div class="column">
         <h2 class="handwritten-font">Library</h2>
-        <div v-for="tracing in storeTracing.tracings" :key="tracing.imageID">
+        <div v-for="tracing in storeTracing.tracings" :key="tracing.id">
             <q-separator />
             <router-link to="/trace" @click="setCurrentTracing(tracing)">
                 <img :src="tracing.previewURL" class="q-pa-sm" />

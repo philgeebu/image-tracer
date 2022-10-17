@@ -89,20 +89,20 @@ const onMouseUp = (e: any) => {
 
 onMounted(() => {
     storeTracing.canvasElement = tracingCanvas.value;
-    storeContext.tracingContext = storeTracing.canvasElement.getContext('2d');
+    storeContext.tracingContext = tracingCanvas.value.getContext('2d');
 });
 
 watch(
     storeTracing.getCurrentTracing,
     async (newValue: any) => {
-        if (!newValue || !newValue.imageID) return router.push('/');
+        if (!newValue || !newValue.id) return router.push('/');
         else {
             const response = await fetch(
-                `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.imageID}`
+                `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.id}`
             );
 
             const data = await response.json();
-
+            console.log(data.hits[0]);
             imageSource.value = data.hits[0].webformatURL;
             storeTracing.canvasWidth = data.hits[0].webformatWidth;
             storeTracing.canvasHeight = data.hits[0].webformatHeight;

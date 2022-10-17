@@ -9,9 +9,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
     const canvasWidth = ref(0);
     const canvasHeight = ref(0);
     const tracings = ref<Tracing[]>(TRACINGS);
-    const currentTracing = ref<Tracing>({
-        imageID: 0,
-    });
+    const currentTracing = ref<Tracing>();
     const tracingOpacity = ref(1);
     const imageOpacity = ref(1);
 
@@ -19,9 +17,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
     const getCurrentTracing = computed(() => currentTracing);
 
     const existingTracingIndex = computed((): number =>
-        tracings.value.findIndex(
-            (t) => t.imageID === currentTracing.value.imageID
-        )
+        tracings.value.findIndex((t) => t.id === currentTracing.value.id)
     );
 
     const currentTracingInLibrary = computed((): boolean =>

@@ -1,6 +1,8 @@
 export interface Tracing {
-    imageID: number;
-    previewURL?: string;
-    webformatURL?: string;
+    id: number;
+    previewURL: string;
+    webformatURL: string;
+    webformatWidth: number;
+    webformatHeight: number;
     canvas?: string;
 }

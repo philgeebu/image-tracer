@@ -48,9 +48,11 @@ const results = ref([]);
 
 const setCurrentTracing = (result: any): void => {
     storeTracing.currentTracing = {
-        imageID: result.id,
+        id: result.id,
         previewURL: result.previewURL,
         webformatURL: result.webformatURL,
+        webformatWidth: result.webformatWidth,
+        webformatHeight: result.webformatHeight,
     };
 };
 

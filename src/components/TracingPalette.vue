@@ -145,10 +145,11 @@ const x = ref(0);
 const y = ref(0);
 const isDrawing = ref(false);
 
-const paletteCanvas = ref<HTMLCanvasElement>();
 const myPalette = ref<HTMLDivElement>();
 const myPaletteHeader = ref<HTMLDivElement>();
+const paletteCanvas = ref<HTMLCanvasElement>();
 
+// Configure Palette Canvas with mouse events
 const drawLine = (
     context: any,
     x1: number,
@@ -162,15 +163,13 @@ const drawLine = (
     context.stroke();
     context.closePath();
 };
-
 const onMouseDown = (e: any) => {
     x.value = e.offsetX;
     y.value = e.offsetY;
     isDrawing.value = true;
 };
-
 const onMouseMove = (e: any) => {
-    if (isDrawing.value === true) {
+    if (isDrawing.value) {
         drawLine(
             storeContext.paletteContext,
             x.value,
@@ -182,9 +181,8 @@ const onMouseMove = (e: any) => {
         y.value = e.offsetY;
     }
 };
-
 const onMouseUp = (e: any) => {
-    if (isDrawing.value === true) {
+    if (isDrawing.value) {
         drawLine(
             storeContext.paletteContext,
             x.value,
@@ -199,40 +197,41 @@ const onMouseUp = (e: any) => {
     }
 };
 
-onMounted(() => {
-    storeContext.paletteContext = paletteCanvas.value.getContext('2d');
-    const dragElement = (element: any) => {
-        let p1 = 0,
-            p2 = 0,
-            p3 = 0,
-            p4 = 0;
+// Create Draggable Palette
+const dragElement = (element: any) => {
+    let p1 = 0,
+        p2 = 0,
+        p3 = 0,
+        p4 = 0;
 
-        const dragMouseDown = (e: any) => {
-            e.preventDefault();
-            p3 = e.clientX;
-            p4 = e.clientY;
-            document.onmouseup = closeDragElement;
-            document.onmousemove = elementDrag;
-        };
-
-        const elementDrag = (e: any) => {
-            e.preventDefault();
-            p1 = p3 - e.clientX;
-            p2 = p4 - e.clientY;
-            p3 = e.clientX;
-            p4 = e.clientY;
-            element.style.top = element.offsetTop - p2 + 'px';
-            element.style.left = element.offsetLeft - p1 + 'px';
-        };
-
-        const closeDragElement = () => {
-            document.onmouseup = null;
-            document.onmousemove = null;
-        };
-
-        myPaletteHeader.value.onmousedown = dragMouseDown;
+    const dragMouseDown = (e: any) => {
+        e.preventDefault();
+        p3 = e.clientX;
+        p4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
     };
 
+    const elementDrag = (e: any) => {
+        e.preventDefault();
+        p1 = p3 - e.clientX;
+        p2 = p4 - e.clientY;
+        p3 = e.clientX;
+        p4 = e.clientY;
+        element.style.top = element.offsetTop - p2 + 'px';
+        element.style.left = element.offsetLeft - p1 + 'px';
+    };
+
+    const closeDragElement = () => {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    };
+
+    myPaletteHeader.value.onmousedown = dragMouseDown;
+};
+
+onMounted(() => {
+    storeContext.paletteContext = paletteCanvas.value.getContext('2d');
     dragElement(myPalette.value);
 });
 </script>
