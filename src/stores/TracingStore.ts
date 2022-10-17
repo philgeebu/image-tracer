@@ -6,8 +6,8 @@ import { TRACINGS } from './mock-data';
 export const useTracingStore = defineStore('tracingStore', () => {
     // STATE
     const canvasElement = ref<HTMLCanvasElement>();
-    const tracings = ref<Tracing[]>(TRACINGS);
     const currentTracing = ref<Tracing>();
+    const tracings = ref<Tracing[]>(TRACINGS);
     const tracingOpacity = ref(1);
     const imageOpacity = ref(1);
 
@@ -64,8 +64,8 @@ export const useTracingStore = defineStore('tracingStore', () => {
     return {
         // STATE
         canvasElement,
-        tracings,
         currentTracing,
+        tracings,
         tracingOpacity,
         imageOpacity,
         // GETTERS
