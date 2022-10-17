@@ -94,9 +94,9 @@ onMounted(() => {
 
 watch(
     storeTracing.getCurrentTracing,
-    async (newValue: any, oldValue: any) => {
+    async (newValue: any) => {
         if (!newValue || !newValue.imageID) return router.push('/');
-        if (!oldValue || oldValue.imageID != newValue.imageID) {
+        else {
             const response = await fetch(
                 `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&id=${storeTracing.currentTracing.imageID}`
             );
@@ -110,19 +110,16 @@ watch(
             storeContext.resetStrokeStyle();
             storeTracing.resetImageOpacity();
             storeTracing.resetTracingOpacity();
-        }
-        storeContext.tracingContext.clearRect(
-            0,
-            0,
-            storeTracing.canvasWidth,
-            storeTracing.canvasHeight
-        );
-        if (newValue.canvas) {
-            storeContext.tracingContext.drawImage(
-                storeTracing.currentTracing.canvas,
+            storeContext.tracingContext.clearRect(
                 0,
-                0
+                0,
+                storeTracing.canvasWidth,
+                storeTracing.canvasHeight
             );
+
+            if (newValue.canvas) {
+                storeContext.tracingContext.drawImage(newValue.canvas, 0, 0);
+            }
         }
     },
     { immediate: true }
