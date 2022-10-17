@@ -22,7 +22,7 @@
             <q-card-section>
                 <div class="row justify-center">
                     <router-link to="/trace" @click="setCurrentTracing(result)">
-                        <img :src="getImageUrl(result.webformatURL)" />
+                        <img :src="result.webformatURL" />
                     </router-link>
                 </div>
             </q-card-section>
@@ -44,16 +44,13 @@ import { useTracingStore } from '../stores/TracingStore';
 const storeTracing = useTracingStore();
 
 const searchTerm = ref('');
-const results = ref<any>([]);
-
-const getImageUrl = (name: string): string => {
-    return new URL(`${name}`, import.meta.url).href;
-};
+const results = ref([]);
 
 const setCurrentTracing = (result: any): void => {
     storeTracing.currentTracing = {
         imageID: result.id,
         previewURL: result.previewURL,
+        webformatURL: result.webformatURL,
     };
 };
 
@@ -67,7 +64,7 @@ watch(searchTerm, () => {
         fetch(
             `https://pixabay.com/api/?key=30198755-511fed12f4c341988f11b1a00&q=${encodeURIComponent(
                 searchTerm.value
-            )}&image_type=photo`
+            )}`
         )
             .then((response) => response.json())
             .then((data) => {
