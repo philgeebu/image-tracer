@@ -33,14 +33,6 @@ export const useContextStore = defineStore('contextStore', () => {
         paletteContext.value.lineWidth = strokeWidth.value;
     };
 
-    const resetStrokeStyle = (): void => {
-        strokeWidth.value = 1;
-        strokeStyleR.value = 0;
-        strokeStyleG.value = 0;
-        strokeStyleB.value = 0;
-        strokeStyleA.value = 1;
-    };
-
     watch(
         [strokeWidth, strokeStyleR, strokeStyleG, strokeStyleB, strokeStyleA],
         () => setStrokeStyle()
@@ -55,7 +47,5 @@ export const useContextStore = defineStore('contextStore', () => {
         strokeStyleG,
         strokeStyleB,
         strokeStyleA,
-        // ACTIONS
-        resetStrokeStyle,
     };
 });

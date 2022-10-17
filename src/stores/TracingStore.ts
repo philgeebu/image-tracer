@@ -4,9 +4,16 @@ import { Tracing } from '../models/main';
 import { TRACINGS } from './mock-data';
 
 export const useTracingStore = defineStore('tracingStore', () => {
+    const blankTracing: Tracing = {
+        id: 0,
+        previewURL: '',
+        webformatURL: '',
+        webformatWidth: 0,
+        webformatHeight: 0,
+    };
     // STATE
     const canvasElement = ref<HTMLCanvasElement>();
-    const currentTracing = ref<Tracing>();
+    const currentTracing = ref<Tracing>(blankTracing);
     const tracings = ref<Tracing[]>(TRACINGS);
     const tracingOpacity = ref(1);
     const imageOpacity = ref(1);
@@ -53,14 +60,6 @@ export const useTracingStore = defineStore('tracingStore', () => {
         }
     };
 
-    const resetTracingOpacity = (): void => {
-        tracingOpacity.value = 1;
-    };
-
-    const resetImageOpacity = (): void => {
-        imageOpacity.value = 1;
-    };
-
     return {
         // STATE
         canvasElement,
@@ -75,7 +74,5 @@ export const useTracingStore = defineStore('tracingStore', () => {
         clearCanvas,
         saveCurrentTracing,
         removeCurrentTracing,
-        resetTracingOpacity,
-        resetImageOpacity,
     };
 });

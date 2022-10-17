@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onBeforeMount, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useContextStore } from '../stores/ContextStore';
 import { useTracingStore } from '../stores/TracingStore';
@@ -39,6 +39,7 @@ const tracingCanvas = ref<HTMLCanvasElement>();
 const x = ref(0);
 const y = ref(0);
 const isDrawing = ref(false);
+const tracing = new Image();
 
 const drawLine = (
     context: any,
@@ -89,29 +90,19 @@ const onMouseUp = (e: any) => {
     }
 };
 
+onBeforeMount(() => {
+    if (!storeTracing.currentTracing.id) return router.push('/');
+});
+
 onMounted(() => {
     storeTracing.canvasElement = tracingCanvas.value;
     storeContext.tracingContext = tracingCanvas.value.getContext('2d');
+
+    if (storeTracing.currentTracing.canvas) {
+        tracing.src = storeTracing.currentTracing.canvas;
+        storeContext.tracingContext.drawImage(tracing, 0, 0);
+    }
 });
-
-watch(
-    storeTracing.getCurrentTracing,
-    (newValue: any) => {
-        if (!newValue || !newValue.id) return router.push('/');
-
-        storeContext.resetStrokeStyle();
-        storeTracing.resetImageOpacity();
-        storeTracing.resetTracingOpacity();
-        // storeTracing.clearCanvas();
-
-        if (newValue.canvas) {
-            const tracing = new Image();
-            tracing.src = newValue.canvas;
-            storeContext.tracingContext.drawImage(tracing, 0, 0);
-        }
-    },
-    { immediate: true }
-);
 </script>
 
 <style scoped>

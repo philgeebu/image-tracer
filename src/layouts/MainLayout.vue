@@ -24,7 +24,7 @@
 
         <!-- PAGE -->
         <q-page-container class="row justify-center">
-            <router-view />
+            <router-view :key="route.fullPath" />
         </q-page-container>
 
         <!-- FOOTER -->
@@ -38,6 +38,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRoute } from 'vue-router';
 import TracingLibrary from 'components/TracingLibrary.vue';
+const route = useRoute();
 const leftDrawerOpen = ref(false);
 </script>
