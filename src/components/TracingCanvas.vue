@@ -27,10 +27,11 @@
 
 <script setup lang="ts">
 import { ref, onBeforeMount, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useContextStore } from '../stores/ContextStore';
 import { useTracingStore } from '../stores/TracingStore';
 
+const route = useRoute();
 const router = useRouter();
 const storeContext = useContextStore();
 const storeTracing = useTracingStore();
@@ -91,7 +92,14 @@ const onMouseUp = (e: any) => {
 };
 
 onBeforeMount(() => {
-    if (!storeTracing.currentTracing.id) return router.push('/');
+    const index = storeTracing.tracings.findIndex(
+        (t) => t.id === parseInt(route.params.id)
+    );
+    if (!storeTracing.currentTracing.id) {
+        if (index != -1)
+            return (storeTracing.currentTracing = storeTracing.tracings[index]);
+        return router.push('/');
+    }
 });
 
 onMounted(() => {
