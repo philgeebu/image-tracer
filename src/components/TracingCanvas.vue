@@ -110,15 +110,12 @@ watch(
             storeContext.resetStrokeStyle();
             storeTracing.resetImageOpacity();
             storeTracing.resetTracingOpacity();
-            storeContext.tracingContext.clearRect(
-                0,
-                0,
-                storeTracing.canvasWidth,
-                storeTracing.canvasHeight
-            );
+            storeTracing.clearCanvas();
 
             if (newValue.canvas) {
-                storeContext.tracingContext.drawImage(newValue.canvas, 0, 0);
+                const tracing = new Image();
+                tracing.src = await newValue.canvas;
+                storeContext.tracingContext.drawImage(tracing, 0, 0);
             }
         }
     },
