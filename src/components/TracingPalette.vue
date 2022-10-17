@@ -116,18 +116,24 @@
                 />
             </q-card-section>
             <q-card-actions align="around">
-                <q-btn @click="storeTracing.saveCurrentTracing()">Save</q-btn>
                 <q-btn
+                    label="Save"
+                    @click="storeTracing.saveCurrentTracing()"
+                />
+                <q-btn
+                    label="Delete"
                     v-if="storeTracing.currentTracingInLibrary"
                     @click="storeTracing.removeCurrentTracing()"
-                    >Delete</q-btn
-                >
+                />
             </q-card-actions>
             <q-card-actions
                 align="around"
                 v-if="storeTracing.currentTracingInLibrary"
             >
-                <q-btn>Export Tracing</q-btn>
+                <q-btn
+                    label="Export Tracing"
+                    @click="storeTracing.exportCanvas()"
+                />
             </q-card-actions>
         </q-card>
     </div>

@@ -40,6 +40,16 @@ export const useTracingStore = defineStore('tracingStore', () => {
         );
     };
 
+    const exportCanvas = (): void => {
+        const canvasUrl = canvasElement.value.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.href = canvasUrl;
+        downloadLink.download =
+            'imageTracer-tracing-' + currentTracing.value.id;
+        downloadLink.click();
+        downloadLink.remove();
+    };
+
     const saveCurrentTracing = (): void => {
         try {
             currentTracing.value.canvas = canvasElement.value.toDataURL();
@@ -72,6 +82,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
         currentTracingInLibrary,
         // ACTIONS
         clearCanvas,
+        exportCanvas,
         saveCurrentTracing,
         removeCurrentTracing,
     };
