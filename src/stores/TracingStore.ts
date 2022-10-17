@@ -36,9 +36,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
 
     const saveCurrentTracing = (): void => {
         try {
-            const tracing = new Image();
-            tracing.src = canvasElement.value.toDataURL();
-            currentTracing.value.canvas = tracing;
+            currentTracing.value.canvas = canvasElement.value.toDataURL();
             if (currentTracingInLibrary.value) {
                 tracings.value[existingTracingIndex.value] =
                     currentTracing.value;
