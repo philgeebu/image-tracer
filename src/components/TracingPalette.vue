@@ -28,6 +28,21 @@
             </q-card-section>
             <q-card-section>
                 <label>
+                    Brush -
+                    <span>{{
+                        Math.round(storeContext.strokeStyleA * 100) + '%'
+                    }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="0.01"
+                    max="1"
+                    step="0.01"
+                    v-model="storeContext.strokeStyleA"
+                />
+                <br />
+                <label>
                     Size - <span>{{ storeContext.strokeWidth }}</span>
                 </label>
                 <br />
@@ -76,37 +91,7 @@
                 />
                 <br />
                 <label>
-                    Brush Alpha -
-                    <span>{{
-                        Math.round(storeContext.strokeStyleA * 100) + '%'
-                    }}</span>
-                </label>
-                <br />
-                <input
-                    type="range"
-                    min="0.01"
-                    max="1"
-                    step="0.01"
-                    v-model="storeContext.strokeStyleA"
-                />
-                <br />
-                <label>
-                    Image Alpha -
-                    <span>{{
-                        Math.round(storeTracing.imageOpacity * 100) + '%'
-                    }}</span>
-                </label>
-                <br />
-                <input
-                    type="range"
-                    min="0.01"
-                    max="1"
-                    step="0.01"
-                    v-model="storeTracing.imageOpacity"
-                />
-                <br />
-                <label>
-                    Tracing Alpha -
+                    Tracing -
                     <span>{{
                         Math.round(storeTracing.tracingOpacity * 100) + '%'
                     }}</span>
@@ -118,6 +103,21 @@
                     max="1"
                     step="0.01"
                     v-model="storeTracing.tracingOpacity"
+                />
+                <br />
+                <label>
+                    Image -
+                    <span>{{
+                        Math.round(storeTracing.imageOpacity * 100) + '%'
+                    }}</span>
+                </label>
+                <br />
+                <input
+                    type="range"
+                    min="0.01"
+                    max="1"
+                    step="0.01"
+                    v-model="storeTracing.imageOpacity"
                 />
             </q-card-section>
             <q-card-actions align="around">
