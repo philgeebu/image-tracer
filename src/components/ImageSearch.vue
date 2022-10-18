@@ -5,7 +5,7 @@
                 <q-input
                     v-model="searchTerm"
                     debounce="500"
-                    placeholder="Search for an image..."
+                    label="Type to search for an image..."
                 >
                     <template v-slot:append v-if="searchTerm">
                         <q-icon name="clear" @click="clear()" />
