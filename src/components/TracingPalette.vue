@@ -1,6 +1,6 @@
 <template>
     <div id="myPalette" ref="myPalette">
-        <q-card style="width: 10.2rem">
+        <q-card style="width: 10.2rem" class="q-pb-sm">
             <div id="myPaletteHeader" ref="myPaletteHeader">
                 <q-card-section>
                     <p class="handwritten-font">PALETTE</p>
@@ -8,7 +8,12 @@
                 <q-separator />
             </div>
             <q-card-actions align="around">
-                <q-btn @click="storeTracing.clearCanvas()">Clear Tracing</q-btn>
+                <q-btn
+                    glossy
+                    label="Clear Tracing"
+                    class="bg-orange-10"
+                    @click="storeTracing.clearCanvas()"
+                />
             </q-card-actions>
             <q-card-section class="q-pb-none">
                 <div class="whiteCanvasBackground"></div>
@@ -117,11 +122,15 @@
             </q-card-section>
             <q-card-actions align="around">
                 <q-btn
+                    glossy
                     label="Save"
+                    class="bg-green-10"
                     @click="storeTracing.saveCurrentTracing()"
                 />
                 <q-btn
+                    glossy
                     label="Delete"
+                    class="bg-red-10"
                     v-if="storeTracing.currentTracingInLibrary"
                     @click="storeTracing.removeCurrentTracing()"
                 />
@@ -131,7 +140,9 @@
                 v-if="storeTracing.currentTracingInLibrary"
             >
                 <q-btn
+                    glossy
                     label="Export Tracing"
+                    class="bg-blue-grey-10"
                     @click="storeTracing.exportCanvas()"
                 />
             </q-card-actions>

@@ -1,5 +1,5 @@
 <template>
-    <div class="column">
+    <div class="column q-pb-xl">
         <h2 class="handwritten-font">Library</h2>
         <div v-for="tracing in storeTracing.tracings" :key="tracing.id">
             <q-separator />
@@ -11,7 +11,12 @@
             </router-link>
         </div>
         <q-separator />
-        <q-btn @click="saveToLocalStorage()" label="Save" class="q-mt-xl" />
+        <q-btn
+            glossy
+            @click="saveToLocalStorage()"
+            label="Save"
+            class="bg-deep-purple-10 q-mt-xl"
+        />
     </div>
 </template>
 <script setup lang="ts">
@@ -36,3 +41,14 @@ const saveToLocalStorage = (): void => {
     );
 };
 </script>
+
+<style scoped>
+img {
+    opacity: 0.75;
+    transition: 0.5s ease;
+}
+img:hover {
+    opacity: 1;
+    transition: 0.5s ease;
+}
+</style>
