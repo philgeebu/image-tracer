@@ -13,6 +13,8 @@ export const useContextStore = defineStore('contextStore', () => {
 
     // ACTIONS
     const setStrokeStyle = (): void => {
+        // create a string using variables set by the palette
+        // that is used to set the strokeStyle
         const rgbaString =
             'rgba(' +
             strokeStyleR.value +
@@ -24,15 +26,18 @@ export const useContextStore = defineStore('contextStore', () => {
             strokeStyleA.value +
             ')';
 
+        // set the stroke style of the main Canvas
         tracingContext.value.strokeStyle = rgbaString;
         tracingContext.value.lineCap = 'round';
         tracingContext.value.lineWidth = strokeWidth.value;
 
+        // set the stroke style of the palette's Canvas (scratch pad)
         paletteContext.value.strokeStyle = rgbaString;
         paletteContext.value.lineCap = 'round';
         paletteContext.value.lineWidth = strokeWidth.value;
     };
 
+    // watch when each setting is adjusted, and reset the stroke style
     watch(
         [strokeWidth, strokeStyleR, strokeStyleG, strokeStyleB, strokeStyleA],
         () => setStrokeStyle()

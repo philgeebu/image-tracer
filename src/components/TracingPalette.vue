@@ -166,7 +166,7 @@ const myPalette = ref<HTMLDivElement>();
 const myPaletteHeader = ref<HTMLDivElement>();
 const paletteCanvas = ref<HTMLCanvasElement>();
 
-// Configure Palette Canvas with mouse events
+// used by mouse events to draw in the Canvas element
 const drawLine = (
     context: any,
     x1: number,
@@ -214,7 +214,7 @@ const onMouseUp = (e: any) => {
     }
 };
 
-// Create Draggable Palette
+// create draggable element and header with mouse evenets
 const dragElement = (element: any) => {
     let p1 = 0,
         p2 = 0,
@@ -244,11 +244,15 @@ const dragElement = (element: any) => {
         document.onmousemove = null;
     };
 
+    // set the dragMouseDown function to the myPaletteHeader ref element
     myPaletteHeader.value.onmousedown = dragMouseDown;
 };
 
 onMounted(() => {
+    // assign the Canvas context to store variable
     storeContext.paletteContext = paletteCanvas.value.getContext('2d');
+
+    // provide the drag element function with the myPalette ref element
     dragElement(myPalette.value);
 });
 </script>

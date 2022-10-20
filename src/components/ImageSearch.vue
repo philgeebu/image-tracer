@@ -64,6 +64,8 @@ const clear = (): void => {
     results.value = [];
 };
 
+// watch searchTerm for changes, which is set on keyup with debounce,
+// and trigger API search for JSON response, then set to results variable
 watch(searchTerm, () => {
     if (searchTerm.value) {
         fetch(

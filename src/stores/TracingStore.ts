@@ -21,15 +21,19 @@ export const useTracingStore = defineStore('tracingStore', () => {
     // GETTERS
     const getCurrentTracing = computed(() => currentTracing);
 
+    // find the index of the current tracing if it exists in user's library
     const existingTracingIndex = computed((): number =>
         tracings.value.findIndex((t) => t.id === currentTracing.value.id)
     );
 
+    // using existingTracingIndex function,
+    // return True if the current tracing is in the user's library
     const currentTracingInLibrary = computed((): boolean =>
         Boolean(existingTracingIndex.value != -1)
     );
 
     // ACTIONS
+    // clear the Canvas using the current tracing's dimensions
     const clearCanvas = (): void => {
         const context = canvasElement.value.getContext('2d');
         context.clearRect(
@@ -40,6 +44,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
         );
     };
 
+    // export the Canvas tracing only (no image) to PNG for transparency
     const exportCanvas = (): void => {
         const canvasUrl = canvasElement.value.toDataURL('image/png');
         const downloadLink = document.createElement('a');
@@ -50,6 +55,8 @@ export const useTracingStore = defineStore('tracingStore', () => {
         downloadLink.remove();
     };
 
+    // add selected image and tracing to user's library
+    // overwrite existing tracing if already in user's library
     const saveCurrentTracing = (): void => {
         try {
             currentTracing.value.canvas = canvasElement.value.toDataURL();
@@ -64,6 +71,7 @@ export const useTracingStore = defineStore('tracingStore', () => {
     };
 
     const removeCurrentTracing = (): void => {
+        // remove current tracing from user's library and clear the Canvas element
         if (confirm('Are you sure?')) {
             tracings.value.splice(existingTracingIndex.value, 1);
             clearCanvas();

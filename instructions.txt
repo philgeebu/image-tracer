@@ -1,0 +1,9 @@
+How to install imageTracer:
+
+- navigate to image-tracer project folder
+- install necessary modules:
+    - npm install
+- run local dev server (default http://localhost:9000)
+    - quasar dev
+
+Local Storage entry will be named "term_project_Gee"

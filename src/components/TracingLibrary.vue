@@ -25,11 +25,13 @@ import { Tracing } from '../models/main';
 
 const storeTracing = useTracingStore();
 
+// set store variable tracings to local storage if it exists
 if (window.localStorage.getItem('term_project_Gee'))
     storeTracing.tracings = JSON.parse(
         window.localStorage.getItem('term_project_Gee')
     );
 
+// used in conjunction with route changes to set the current tracing variable
 const setCurrentTracing = (tracing: Tracing): void => {
     storeTracing.currentTracing = tracing;
 };
