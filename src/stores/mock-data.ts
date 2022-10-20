@@ -2,30 +2,30 @@ import { Tracing } from '../models/main';
 
 export const TRACINGS: Tracing[] = [
     {
-        id: 3010309,
+        id: 50267,
         previewURL:
-            'https://cdn.pixabay.com/photo/2017/12/10/17/00/robot-3010309_150.jpg',
+            'https://cdn.pixabay.com/photo/2012/06/19/10/32/owl-50267_150.jpg',
         webformatURL:
-            'https://pixabay.com/get/gf4c32c116d3c8421bbc8dc9e8cfbefd3ba4d1af803e0690765fa7ed608423bddcc5f915b24802c1df4b1dbd8b6f3385327c69b62b233a64e37f6de588475acac_640.jpg',
+            'https://pixabay.com/get/gbe029cd620f3c8a3f0b6a5a35ea5a2911a34ae1571ea31150a90587e7b1241aa356194bcc479f7fc25ab0372ec1e8c37_640.jpg',
         webformatWidth: 640,
-        webformatHeight: 426,
+        webformatHeight: 480,
     },
     {
-        id: 3609237,
+        id: 1883658,
         previewURL:
-            'https://cdn.pixabay.com/photo/2018/08/15/22/24/bridge-3609237_150.jpg',
+            'https://cdn.pixabay.com/photo/2016/12/05/11/39/fox-1883658_150.jpg',
         webformatURL:
-            'https://pixabay.com/get/g8a3dadb152cc23a7c022ee95a3d403ef0103c07857e65356530e87f188ab0f04c045a6c135c81c7e1c9e6ab33baf5d793abf1bd0c4e0b44547cf2def16ac827c_640.jpg',
+            'https://pixabay.com/get/g8f629c657e6f74784da5e25caf6d52e0db78c118912834871025a295c8de0aedc76ee1913e7411ee681c204727ebe0559b28102affa68d5665bf5c357dacf414_640.jpg',
         webformatWidth: 640,
-        webformatHeight: 426,
+        webformatHeight: 427,
     },
     {
-        id: 413685,
+        id: 1045782,
         previewURL:
-            'https://cdn.pixabay.com/photo/2014/08/08/20/51/hunger-413685_150.jpg',
+            'https://cdn.pixabay.com/photo/2015/11/16/14/43/cat-1045782_150.jpg',
         webformatURL:
-            'https://pixabay.com/get/g9c5349af8a6f47f0044d17e54ad118bc019d1cd4badcbfe1ce4ff72e514ccba3fe87f47e711271afdc8d04bc1a166dd8_640.jpg',
+            'https://pixabay.com/get/g1938db0fd6e744475dbc65be4659b271d8eb5eade7ecdec020a007f6cfca5bda55470c120ae1c05031d723eb5ee9b2b33981cfa72eb3950d1eec59a8776a589c_640.jpg',
         webformatWidth: 640,
-        webformatHeight: 426,
+        webformatHeight: 437,
     },
 ];
